@@ -1,6 +1,7 @@
 package Game;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,18 +14,33 @@ public class Demo implements KeyListener {
   private static int yAcc = 0;
   private static int logYCord = 70;
   private static int xVal = 1100;
+  private static int intruderXCord=500;
+  private static int intruderYCord=500;
+  private static int intruderYVel;
+  private static int intruderYAcc;
   private static boolean started = false;
   private static boolean paused = false;
   private static boolean lost = false;
   private static int hurdle1XCord,hurdle1YCord,hurdle2XCord,hurdle2YCord,hurdle3XCord,hurdle4XCord,hurdle3YCord,hurdle4YCord;
+  private static boolean hurdle1Visible,hurdle2Visible,hurdle3Visible,hurdle4Visible;
   private static int starXCord=1000;
-  private static int starYCord,coinYCord,coinXCord;
+  private static int starYCord,coinYCord,coinXCord,berriesYCord,berriesXCord;
+  private static int cloneXCord[]=new int[3];
+  private static int cloneYCord[]=new int[3];
   private static int score = 0;
   private static int counter=60;
-  private static boolean isPlayerVisible=true,coinDisplay,starVisible;
+  private static boolean isPlayerVisible=true,coinDisplay,starVisible,berriesVisible,clonesActive,intruderVisible;
   private static Image hurdle[] = new Image[4];
-  private static Rectangle hurdle1Rect, hurdle2Rect, hurdle3Rect, hurdle4Rect,starRect,coinRect;
+  private static Rectangle intruderRect;
+  private static Rectangle hurdle1Rect, hurdle2Rect, hurdle3Rect, hurdle4Rect,starRect,coinRect,berriesRect,clone1Rect,clone2Rect,clone3Rect;
   private static Image branch;
+  private static Image intruderShown;
+  private static java.applet.AudioClip coinAudio;
+  private static java.applet.AudioClip starAudio;
+  private static java.applet.AudioClip berryAudio;
+  private static java.applet.AudioClip flapAudio;
+  private static java.applet.AudioClip themeAudio;
+  private static java.applet.AudioClip hitAudio,jumpAudio;
   private static Font font1 = new Font("Kristen ITC", Font.BOLD, 22);
   private static Font font2 = new Font("Kristen ITC", Font.BOLD, 18);
   private static Font font3 = new Font("Kristen ITC", Font.PLAIN, 16);
@@ -37,6 +53,8 @@ public class Demo implements KeyListener {
     frame.pack();
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    frame.setResizable(false);
     Graphics g = panel.getGraphics();
     panel.setFocusable(true);
     panel.requestFocus();
@@ -72,7 +90,14 @@ public class Demo implements KeyListener {
     Image coin2 = null;
     Image coin3 = null;
     Image coin4 = null;
-
+    Image berries = null;
+    Image happyPakia = null;
+    Image sadPakia = null;
+    Image angryPakia = null;
+    Demo.berriesVisible=false;
+    Demo.clonesActive=false;
+    Demo.hurdle1Visible=Demo.hurdle2Visible=Demo.hurdle3Visible=Demo.hurdle4Visible=true;
+    int intruderNumber=0;
 
     try {
       back = ImageIO.read(Demo.class.getResource("../images/back.png"));
@@ -98,6 +123,7 @@ public class Demo implements KeyListener {
       coin2 = ImageIO.read(Demo.class.getResource("../images/coin2.png"));
       coin3 = ImageIO.read(Demo.class.getResource("../images/coin3.png"));
       coin4 = ImageIO.read(Demo.class.getResource("../images/coin4.png"));
+      berries = ImageIO.read(Demo.class.getResource("../images/berries.png"));
       forkHandle = ImageIO.read(Demo.class.getResource("../images/fork_handle.png"));
       forkHandleRev = ImageIO.read(Demo.class.getResource("../images/fork_handlerev.png"));
       Demo.branch = ImageIO.read(Demo.class.getResource("../images/branch.png"));
@@ -105,13 +131,25 @@ public class Demo implements KeyListener {
       forkRev = ImageIO.read(Demo.class.getResource("../images/fork_headrev.png"));
       log = ImageIO.read(Demo.class.getResource("../images/log.png"));
       controls = ImageIO.read(Demo.class.getResource("../images/controls.png"));
+      happyPakia = ImageIO.read(Demo.class.getResource("../images/happy_pakia.png"));
+      sadPakia = ImageIO.read(Demo.class.getResource("../images/sad_pakia.png"));
+      angryPakia = ImageIO.read(Demo.class.getResource("../images/angry_pakia.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    coinAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/coin.wav"));
+    starAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/star.wav"));
+    flapAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/flap.wav"));
+    berryAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/berry.wav"));
+    themeAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/theme.wav"));
+    hitAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/hit.wav"));
+    jumpAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/jump.wav"));
+
     int backxcord = 0;
     int back1xcord = 1000;
     int count = 0;
-
+    Demo.themeAudio.loop();
     hurdle[0] = branch;
     hurdle[1] = branch;
     hurdle[2] = branch;
@@ -120,7 +158,9 @@ public class Demo implements KeyListener {
     Image imageArray[] = {p1, p2, p3, p4, p5, p6, p7, p8};
     Image tImageArray[] = {pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8};
     Image coinArray[] = {coin1,coin2,coin3,coin4};
+    Image intrudersImage[]={happyPakia,angryPakia,sadPakia};
     int scoreArray[]={50,100,200,500};
+
     Demo.hurdle1XCord = 1000;
     Demo.hurdle2XCord = 1000;
     Demo.hurdle3XCord = 1500;
@@ -131,17 +171,25 @@ public class Demo implements KeyListener {
     Demo.hurdle4YCord = 250;
     starRect=new Rectangle(41,39);
     coinRect=new Rectangle(30,30);
+    berriesRect=new Rectangle(30,42);
+    clone1Rect=new Rectangle(60,60);
+    clone2Rect=new Rectangle(60,60);
+    clone3Rect=new Rectangle(60,60);
+    intruderRect=new Rectangle(52,51);
     Random ran = new Random();
     boolean forkOrBranch;
     boolean upOrDown;
     coinDisplay=false;
-    int length,whichCoin=0;
+    Demo.intruderVisible=false;
+    int length,whichCoin=0,decider;
     Image coinShown=null;
     hurdle1Rect = new Rectangle(Demo.hurdle1XCord, Demo.hurdle1YCord, 31, 500);
     hurdle2Rect = new Rectangle(Demo.hurdle2XCord, Demo.hurdle2YCord, 31, 500);
     hurdle3Rect = new Rectangle(Demo.hurdle3XCord, Demo.hurdle3YCord, 31, 500);
     hurdle4Rect = new Rectangle(Demo.hurdle4XCord, Demo.hurdle4YCord, 31, 500);
     Rectangle playerRect = new Rectangle(60, 60);
+
+
     while (true) {
       try {
         Thread.sleep(70);
@@ -169,11 +217,30 @@ public class Demo implements KeyListener {
       g.drawImage(back, backxcord, 0, null);
       g.drawImage(back1, back1xcord, 0, null);
       g.drawImage(log, Demo.logYCord, 330, null);
-      g.drawImage(Demo.hurdle[0], Demo.hurdle1XCord, Demo.hurdle1YCord, null);
-      g.drawImage(Demo.hurdle[1], Demo.hurdle2XCord, Demo.hurdle2YCord, null);
-      g.drawImage(Demo.hurdle[2], Demo.hurdle3XCord, Demo.hurdle3YCord, null);
-      g.drawImage(Demo.hurdle[3], Demo.hurdle4XCord, Demo.hurdle4YCord, null);
-      if(ran.nextInt(20)==4&&Demo.hurdle1XCord>=700&&Demo.hurdle1XCord<=800&&!starVisible&&Demo.isPlayerVisible) {
+
+
+      if(hurdle1Visible) {
+        hurdle1Rect.x = Demo.hurdle1XCord;
+        hurdle1Rect.y = Demo.hurdle1YCord;
+        g.drawImage(Demo.hurdle[0], Demo.hurdle1XCord, Demo.hurdle1YCord, null);
+      }
+      if(hurdle2Visible) {
+        hurdle2Rect.x = Demo.hurdle2XCord;
+        hurdle2Rect.y = Demo.hurdle2YCord;
+        g.drawImage(Demo.hurdle[1], Demo.hurdle2XCord, Demo.hurdle2YCord, null);
+      }
+      if(hurdle3Visible) {
+        hurdle3Rect.x = Demo.hurdle3XCord;
+        hurdle3Rect.y = Demo.hurdle3YCord;
+        g.drawImage(Demo.hurdle[2], Demo.hurdle3XCord, Demo.hurdle3YCord, null);
+      }
+      if(hurdle4Visible) {
+        hurdle4Rect.x = Demo.hurdle4XCord;
+        hurdle4Rect.y = Demo.hurdle4YCord;
+        g.drawImage(Demo.hurdle[3], Demo.hurdle4XCord, Demo.hurdle4YCord, null);
+      }
+
+      if(ran.nextInt(10)==5&&Demo.hurdle1XCord>=700&&Demo.hurdle1XCord<=800&&!starVisible&&Demo.isPlayerVisible) {
         starVisible=true;
         Demo.starYCord=ran.nextInt(200)+100;
         Demo.starXCord=1000;
@@ -186,6 +253,7 @@ public class Demo implements KeyListener {
         Demo.starRect.y=Demo.starYCord;
       }
       if(starRect.intersects(playerRect)&&starVisible){
+        Demo.starAudio.play();
         starVisible=false;
         starRect.x=1000;
         starRect.y=1000;
@@ -203,12 +271,20 @@ public class Demo implements KeyListener {
       }
 
 
-      if(ran.nextInt(20)==4&&Demo.hurdle3XCord>=700&&Demo.hurdle3XCord<=800&&!coinDisplay) {
-        Demo.coinYCord=ran.nextInt(200)+100;
-        Demo.coinXCord=1000;
-        whichCoin=ran.nextInt(4);
-        coinDisplay=true;
-        coinShown=coinArray[whichCoin];
+      if(Demo.hurdle3XCord>=700&&Demo.hurdle3XCord<=800&&(!coinDisplay&&!berriesVisible)) {
+        decider=ran.nextInt(10);
+        if(decider==4&&!coinDisplay) {
+          Demo.coinYCord = ran.nextInt(200) + 100;
+          Demo.coinXCord = 1000;
+          whichCoin = ran.nextInt(4);
+          coinDisplay = true;
+          coinShown = coinArray[whichCoin];
+        }
+        else if(decider==8&&!berriesVisible){
+          Demo.berriesYCord = ran.nextInt(200) + 100;
+          Demo.berriesXCord = 1000;
+          berriesVisible=true;
+        }
       }
 
       if(coinDisplay){
@@ -216,10 +292,25 @@ public class Demo implements KeyListener {
         Demo.coinRect.x=Demo.coinXCord;
         Demo.coinRect.y=Demo.coinYCord;
       }
+      if(berriesVisible){
+        g.drawImage(berries,Demo.berriesXCord,Demo.berriesYCord,null);
+        Demo.berriesRect.x=Demo.berriesXCord;
+        Demo.berriesRect.y=Demo.berriesYCord;
+      }
 
       if(playerRect.intersects(coinRect)&&coinDisplay){
+        Demo.coinAudio.play();
         coinDisplay=false;
         score+=scoreArray[whichCoin];
+      }
+
+
+      if(playerRect.intersects(berriesRect)&&berriesVisible){
+        Demo.berryAudio.play();
+        berriesVisible=false;
+        clonesActive=true;
+        cloneXCord[0]=cloneXCord[1]=cloneXCord[2]=Demo.berriesXCord;
+        cloneYCord[0]=cloneYCord[1]=cloneYCord[2]=Demo.berriesYCord;
       }
 
       Demo.coinXCord-=20;
@@ -227,7 +318,34 @@ public class Demo implements KeyListener {
       {
         coinDisplay=false;
       }
+      Demo.berriesXCord-=20;
+      if(Demo.berriesXCord<=-30)
+      {
+        berriesVisible=false;
+      }
 
+
+      if(Demo.clonesActive){
+        g.drawImage(imageArray[count],cloneXCord[0],cloneYCord[0],null);
+        g.drawImage(imageArray[count],cloneXCord[1],cloneYCord[1],null);
+        g.drawImage(imageArray[count],cloneXCord[2],cloneYCord[2],null);
+        Demo.clone1Rect.x=cloneXCord[0];
+        Demo.clone2Rect.x=cloneXCord[1];
+        Demo.clone3Rect.x=cloneXCord[2];
+        Demo.clone1Rect.y=cloneYCord[0];
+        Demo.clone2Rect.y=cloneYCord[1];
+        Demo.clone3Rect.y=cloneYCord[2];
+      }
+      if(clonesActive) {
+        cloneXCord[0] += 30;
+        cloneXCord[1] += 30;
+        cloneXCord[2] += 30;
+        cloneYCord[1] += 10;
+        cloneYCord[2] -= 10;
+      }
+      if(cloneXCord[0]>=1000) {
+        clonesActive = false;
+      }
 
       if(Demo.isPlayerVisible)
         g.drawImage(imageArray[count], 63, Demo.yCord, null);
@@ -240,7 +358,38 @@ public class Demo implements KeyListener {
       }
 
 
+      if(ran.nextInt(40)==8&&!Demo.intruderVisible){
+        Demo.intruderVisible=true;
+        intruderNumber=ran.nextInt(3);
+        Demo.jumpAudio.play();
+        Demo.intruderShown=intrudersImage[intruderNumber];
+        Demo.intruderYVel=-25;
+       Demo.intruderYAcc=1;
+       Demo.intruderXCord=500;
+       Demo.intruderYCord=500;
+      }
+
+      if(Demo.intruderVisible){
+        g.drawImage(intruderShown,Demo.intruderXCord,Demo.intruderYCord,null);
+        Demo.intruderYCord+=Demo.intruderYVel;
+        Demo.intruderYVel+=Demo.intruderYAcc;
+        Demo.intruderRect.x=Demo.intruderXCord;
+        Demo.intruderRect.y=Demo.intruderYCord;
+        Demo.intruderXCord+=-20;
+      }
+
+      if(Demo.intruderXCord<=-52&&Demo.intruderVisible){
+        Demo.intruderVisible=false;
+      }
+
+      if(intruderRect.intersects(playerRect)&&intruderVisible&&Demo.isPlayerVisible){
+        Demo.hitAudio.play();
+        Demo.lost=true;
+      }
+
       if (Demo.hurdle1XCord <= -33 && Demo.hurdle2XCord <= 33) {
+        hurdle1Visible=true;
+        hurdle2Visible=true;
         forkOrBranch = ran.nextBoolean();
         if (!forkOrBranch) {
           Demo.hurdle[0] = branch;
@@ -279,6 +428,8 @@ public class Demo implements KeyListener {
         }
       }
       if (Demo.hurdle3XCord <= -33 && Demo.hurdle4XCord <= 33) {
+        hurdle3Visible=true;
+        hurdle4Visible=true;
         forkOrBranch = ran.nextBoolean();
         if (forkOrBranch) {
           Demo.hurdle[2] = branch;
@@ -316,18 +467,26 @@ public class Demo implements KeyListener {
         }
       }
 
-      hurdle1Rect.x = Demo.hurdle1XCord;
-      hurdle2Rect.x = Demo.hurdle2XCord;
-      hurdle3Rect.x = Demo.hurdle3XCord;
-      hurdle4Rect.x = Demo.hurdle4XCord;
-      hurdle1Rect.y = Demo.hurdle1YCord;
-      hurdle2Rect.y = Demo.hurdle2YCord;
-      hurdle3Rect.y = Demo.hurdle3YCord;
-      hurdle4Rect.y = Demo.hurdle4YCord;
+
 
       if ((playerRect.intersects(hurdle1Rect) || playerRect.intersects(hurdle2Rect) || playerRect.intersects(hurdle3Rect) || playerRect.intersects(hurdle4Rect))&&Demo.isPlayerVisible)
+      {
+        Demo.hitAudio.play();
         Demo.lost = true;
+      }
 
+      if(clonesActive) {
+        if ((clone1Rect.intersects(hurdle1Rect) || clone2Rect.intersects(hurdle1Rect) || clone3Rect.intersects(hurdle1Rect)))
+          hurdle1Visible = hurdle2Visible=false;
+        if ((clone1Rect.intersects(hurdle2Rect) || clone2Rect.intersects(hurdle2Rect) || clone3Rect.intersects(hurdle2Rect)))
+          hurdle1Visible=hurdle2Visible = false;
+        if ((clone1Rect.intersects(hurdle3Rect) || clone2Rect.intersects(hurdle3Rect) || clone3Rect.intersects(hurdle3Rect)))
+          hurdle4Visible=hurdle3Visible = false;
+        if ((clone1Rect.intersects(hurdle4Rect) || clone2Rect.intersects(hurdle4Rect) || clone3Rect.intersects(hurdle4Rect)))
+          hurdle3Visible=hurdle4Visible = false;
+        if ((clone1Rect.intersects(intruderRect) || clone2Rect.intersects(intruderRect) || clone3Rect.intersects(intruderRect)))
+          intruderVisible= false;
+      }
       g.setColor(Color.BLACK);
       g.setFont(font2);
       g.drawString("Your Score : " + Demo.score, 30, 40);
@@ -373,6 +532,7 @@ public class Demo implements KeyListener {
   @Override
   public void keyPressed(KeyEvent e) {
     if (e.getKeyCode() == KeyEvent.VK_UP && !Demo.paused && !Demo.lost) {
+      Demo.flapAudio.play();
       Demo.started = true;
       Demo.yVel = -20;
       Demo.yAcc = 4;
@@ -401,6 +561,10 @@ public class Demo implements KeyListener {
       Demo.isPlayerVisible=true;
       Demo.coinDisplay=false;
       Demo.starVisible=false;
+      Demo.hurdle1Visible=Demo.hurdle2Visible=Demo.hurdle3Visible=Demo.hurdle4Visible=true;
+      Demo.clonesActive=false;
+      Demo.intruderVisible=false;
+      berriesVisible=false;
       hurdle1Rect = new Rectangle(Demo.hurdle1XCord, Demo.hurdle1YCord, 31, 500);
       hurdle2Rect = new Rectangle(Demo.hurdle2XCord, Demo.hurdle2YCord, 31, 500);
       hurdle3Rect = new Rectangle(Demo.hurdle3XCord, Demo.hurdle3YCord, 31, 500);

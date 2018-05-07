@@ -5,7 +5,9 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Demo implements KeyListener {
@@ -60,9 +62,11 @@ public class Demo implements KeyListener {
     panel.requestFocus();
     Demo p = new Demo();
     panel.addKeyListener(p);
-    Image back;
-    back = null;
-    Image back1 = null;
+    Image back = null;
+    Image cloud = null;
+    Image fTree = null;
+    Image bTree = null;
+    Image grass = null;
     Image p1 = null;
     Image p2 = null;
     Image p3 = null;
@@ -94,14 +98,24 @@ public class Demo implements KeyListener {
     Image happyPakia = null;
     Image sadPakia = null;
     Image angryPakia = null;
-    Demo.berriesVisible=false;
-    Demo.clonesActive=false;
-    Demo.hurdle1Visible=Demo.hurdle2Visible=Demo.hurdle3Visible=Demo.hurdle4Visible=true;
-    int intruderNumber=0;
-
+    Demo.berriesVisible = false;
+    Demo.clonesActive = false;
+    Demo.hurdle1Visible = Demo.hurdle2Visible = Demo.hurdle3Visible = Demo.hurdle4Visible = true;
+    int intruderNumber;
+    int cx1 = 0;
+    int cx2 = 1000;
+    int fx1 = 0;
+    int fx2 = 1000;
+    int bx1 = 0;
+    int bx2 = 1000;
+    int gx1 = 0;
+    int gx2 = 1000;
     try {
-      back = ImageIO.read(Demo.class.getResource("../images/back.png"));
-      back1 = ImageIO.read(Demo.class.getResource("../images/back.png"));
+      back = ImageIO.read(Demo.class.getResource("../images/back1.png"));
+      cloud = ImageIO.read(Demo.class.getResource("../images/clouds.png"));
+      bTree = ImageIO.read(Demo.class.getResource("../images/back_trees.png"));
+      fTree = ImageIO.read(Demo.class.getResource("../images/front_trees.png"));
+      grass = ImageIO.read(Demo.class.getResource("../images/ground.png"));
       p1 = ImageIO.read(Demo.class.getResource("../images/pappu_1.png"));
       p2 = ImageIO.read(Demo.class.getResource("../images/pappu_2.png"));
       p3 = ImageIO.read(Demo.class.getResource("../images/pappu_3.png"));
@@ -138,28 +152,43 @@ public class Demo implements KeyListener {
       e.printStackTrace();
     }
 
-    coinAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/coin.wav"));
-    starAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/star.wav"));
-    flapAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/flap.wav"));
-    berryAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/berry.wav"));
-    themeAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/theme.wav"));
-    hitAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/hit.wav"));
-    jumpAudio= Applet.newAudioClip(Demo.class.getResource("../sounds/jump.wav"));
+    Image cloud1 = cloud;
+    Image cloud2 = cloud;
+    Image bTree1 = bTree;
+    Image bTree2 = bTree;
+    Image fTree1 = fTree;
+    Image fTree2 = fTree;
+    Image grass1 = grass;
+    Image grass2 = grass;
+    coinAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/coin.wav"));
+    starAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/star.wav"));
+    flapAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/flap.wav"));
+    berryAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/berry.wav"));
+    themeAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/theme.wav"));
+    hitAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/hit.wav"));
+    jumpAudio = Applet.newAudioClip(Demo.class.getResource("../sounds/jump.wav"));
 
-    int backxcord = 0;
-    int back1xcord = 1000;
     int count = 0;
     Demo.themeAudio.loop();
     hurdle[0] = branch;
     hurdle[1] = branch;
     hurdle[2] = branch;
     hurdle[3] = branch;
-    starVisible=false;
-    Image imageArray[] = {p1, p2, p3, p4, p5, p6, p7, p8};
+    starVisible = false;
+    //Image imageArray[] = {p1, p2, p3, p4, p5, p6, p7, p8};
+    ArrayList<Image> imageArray = new ArrayList<>();
+    imageArray.add(p1);
+    imageArray.add(p2);
+    imageArray.add(p3);
+    imageArray.add(p4);
+    imageArray.add(p5);
+    imageArray.add(p6);
+    imageArray.add(p7);
+    imageArray.add(p8);
     Image tImageArray[] = {pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8};
-    Image coinArray[] = {coin1,coin2,coin3,coin4};
-    Image intrudersImage[]={happyPakia,angryPakia,sadPakia};
-    int scoreArray[]={50,100,200,500};
+    Image coinArray[] = {coin1, coin2, coin3, coin4};
+    Image intrudersImage[] = {happyPakia, angryPakia, sadPakia};
+    int scoreArray[] = {100, 200, 500, 1000};
 
     Demo.hurdle1XCord = 1000;
     Demo.hurdle2XCord = 1000;
@@ -169,20 +198,20 @@ public class Demo implements KeyListener {
     Demo.hurdle2YCord = 350;
     Demo.hurdle3YCord = -400;
     Demo.hurdle4YCord = 250;
-    starRect=new Rectangle(41,39);
-    coinRect=new Rectangle(30,30);
-    berriesRect=new Rectangle(30,42);
-    clone1Rect=new Rectangle(60,60);
-    clone2Rect=new Rectangle(60,60);
-    clone3Rect=new Rectangle(60,60);
-    intruderRect=new Rectangle(52,51);
+    starRect = new Rectangle(41, 39);
+    coinRect = new Rectangle(30, 30);
+    berriesRect = new Rectangle(30, 42);
+    clone1Rect = new Rectangle(60, 60);
+    clone2Rect = new Rectangle(60, 60);
+    clone3Rect = new Rectangle(60, 60);
+    intruderRect = new Rectangle(52, 51);
     Random ran = new Random();
     boolean forkOrBranch;
     boolean upOrDown;
-    coinDisplay=false;
-    Demo.intruderVisible=false;
-    int length,whichCoin=0,decider;
-    Image coinShown=null;
+    coinDisplay = false;
+    Demo.intruderVisible = false;
+    int length, whichCoin = 0, decider;
+    Image coinShown = null;
     hurdle1Rect = new Rectangle(Demo.hurdle1XCord, Demo.hurdle1YCord, 31, 500);
     hurdle2Rect = new Rectangle(Demo.hurdle2XCord, Demo.hurdle2YCord, 31, 500);
     hurdle3Rect = new Rectangle(Demo.hurdle3XCord, Demo.hurdle3YCord, 31, 500);
@@ -190,206 +219,214 @@ public class Demo implements KeyListener {
     Rectangle playerRect = new Rectangle(60, 60);
 
 
+    Image bigImage = new BufferedImage(1000, 500, BufferedImage.TYPE_INT_RGB);
+    Graphics imageGraphics = bigImage.getGraphics();
+
     while (true) {
       try {
         Thread.sleep(70);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
+      g.drawImage(bigImage, 0, 0, null);
       if (Demo.paused) {
-        g.setColor(Color.RED);
-        g.setFont(font1);
-        g.drawString("Game Paused !", 400, 230);
-        g.drawString("Press SpaceBar to continue !!", 310, 265);
+        imageGraphics.setColor(Color.RED);
+        imageGraphics.setFont(font1);
+        imageGraphics.drawString("Game Paused !", 400, 230);
+        imageGraphics.drawString("Press SpaceBar to continue !!", 310, 265);
         continue;
       }
 
       if (Demo.lost) {
-        g.setColor(Color.RED);
-        g.setFont(font1);
-        g.drawString("Game Over !", 400, 230);
-        g.drawString("Press Enter to Restart !!", 310, 265);
+        imageGraphics.setColor(Color.RED);
+        imageGraphics.setFont(font1);
+        imageGraphics.drawString("Game Over !", 400, 230);
+        imageGraphics.drawString("Press Enter to Restart !!", 310, 265);
         continue;
       }
 
       count = (count + 1) % 8;
 
-      g.drawImage(back, backxcord, 0, null);
-      g.drawImage(back1, back1xcord, 0, null);
-      g.drawImage(log, Demo.logYCord, 330, null);
+      imageGraphics.drawImage(back,0,0,null);
+      imageGraphics.drawImage(cloud1,cx1,0,null);
+      imageGraphics.drawImage(cloud2,cx2,0,null);
+      imageGraphics.drawImage(bTree1,bx1,0,null);
+      imageGraphics.drawImage(bTree2,bx2,0,null);
+      imageGraphics.drawImage(fTree1,fx1,0,null);
+      imageGraphics.drawImage(fTree2,fx2,0,null);
+      imageGraphics.drawImage(grass1,gx1,0,null);
+      imageGraphics.drawImage(grass2,gx2,0,null);
+
+      imageGraphics.drawImage(log, Demo.logYCord, 330, null);
 
 
-      if(hurdle1Visible) {
+      if (hurdle1Visible) {
         hurdle1Rect.x = Demo.hurdle1XCord;
         hurdle1Rect.y = Demo.hurdle1YCord;
-        g.drawImage(Demo.hurdle[0], Demo.hurdle1XCord, Demo.hurdle1YCord, null);
+        imageGraphics.drawImage(Demo.hurdle[0], Demo.hurdle1XCord, Demo.hurdle1YCord, null);
       }
-      if(hurdle2Visible) {
+      if (hurdle2Visible) {
         hurdle2Rect.x = Demo.hurdle2XCord;
         hurdle2Rect.y = Demo.hurdle2YCord;
-        g.drawImage(Demo.hurdle[1], Demo.hurdle2XCord, Demo.hurdle2YCord, null);
+        imageGraphics.drawImage(Demo.hurdle[1], Demo.hurdle2XCord, Demo.hurdle2YCord, null);
       }
-      if(hurdle3Visible) {
+      if (hurdle3Visible) {
         hurdle3Rect.x = Demo.hurdle3XCord;
         hurdle3Rect.y = Demo.hurdle3YCord;
-        g.drawImage(Demo.hurdle[2], Demo.hurdle3XCord, Demo.hurdle3YCord, null);
+        imageGraphics.drawImage(Demo.hurdle[2], Demo.hurdle3XCord, Demo.hurdle3YCord, null);
       }
-      if(hurdle4Visible) {
+      if (hurdle4Visible) {
         hurdle4Rect.x = Demo.hurdle4XCord;
         hurdle4Rect.y = Demo.hurdle4YCord;
-        g.drawImage(Demo.hurdle[3], Demo.hurdle4XCord, Demo.hurdle4YCord, null);
+        imageGraphics.drawImage(Demo.hurdle[3], Demo.hurdle4XCord, Demo.hurdle4YCord, null);
       }
 
-      if(ran.nextInt(10)==5&&Demo.hurdle1XCord>=700&&Demo.hurdle1XCord<=800&&!starVisible&&Demo.isPlayerVisible) {
-        starVisible=true;
-        Demo.starYCord=ran.nextInt(200)+100;
-        Demo.starXCord=1000;
+      if (ran.nextInt(10) == 5 && Demo.hurdle1XCord >= 700 && Demo.hurdle1XCord <= 800 && !starVisible && Demo.isPlayerVisible) {
+        starVisible = true;
+        Demo.starYCord = ran.nextInt(200) + 100;
+        Demo.starXCord = 1000;
       }
       playerRect.x = 63;
       playerRect.y = Demo.yCord;
-      if(starVisible){
-        g.drawImage(star,Demo.starXCord,Demo.starYCord,null);
-        Demo.starRect.x=Demo.starXCord;
-        Demo.starRect.y=Demo.starYCord;
+      if (starVisible) {
+        imageGraphics.drawImage(star, Demo.starXCord, Demo.starYCord, null);
+        Demo.starRect.x = Demo.starXCord;
+        Demo.starRect.y = Demo.starYCord;
       }
-      if(starRect.intersects(playerRect)&&starVisible){
+      if (starRect.intersects(playerRect) && starVisible) {
         Demo.starAudio.play();
-        starVisible=false;
-        starRect.x=1000;
-        starRect.y=1000;
-        Demo.isPlayerVisible=false;
+        starVisible = false;
+        starRect.x = 1000;
+        starRect.y = 1000;
+        Demo.isPlayerVisible = false;
       }
-      if(!Demo.isPlayerVisible){
-        g.setColor(Color.RED);
-        g.setFont(font3);
+      if (!Demo.isPlayerVisible) {
+        imageGraphics.setColor(Color.RED);
+        imageGraphics.setFont(font3);
         counter--;
-        g.drawString("Powered UP : " +counter, 850, 30);
+        imageGraphics.drawString("Powered UP : " + counter, 850, 30);
       }
-      if(counter<=0){
-        Demo.isPlayerVisible=true;
-        counter=60;
+      if (counter <= 0) {
+        Demo.isPlayerVisible = true;
+        counter = 60;
       }
 
 
-      if(Demo.hurdle3XCord>=700&&Demo.hurdle3XCord<=800&&(!coinDisplay&&!berriesVisible)) {
-        decider=ran.nextInt(10);
-        if(decider==4&&!coinDisplay) {
+      if (Demo.hurdle3XCord >= 700 && Demo.hurdle3XCord <= 800 && (!coinDisplay && !berriesVisible)) {
+        decider = ran.nextInt(10);
+        if (decider == 4 && !coinDisplay) {
           Demo.coinYCord = ran.nextInt(200) + 100;
           Demo.coinXCord = 1000;
           whichCoin = ran.nextInt(4);
           coinDisplay = true;
           coinShown = coinArray[whichCoin];
-        }
-        else if(decider==8&&!berriesVisible){
+        } else if (decider == 8 && !berriesVisible) {
           Demo.berriesYCord = ran.nextInt(200) + 100;
           Demo.berriesXCord = 1000;
-          berriesVisible=true;
+          berriesVisible = true;
         }
       }
 
-      if(coinDisplay){
-        g.drawImage(coinShown,Demo.coinXCord,Demo.coinYCord,null);
-        Demo.coinRect.x=Demo.coinXCord;
-        Demo.coinRect.y=Demo.coinYCord;
+      if (coinDisplay) {
+        imageGraphics.drawImage(coinShown, Demo.coinXCord, Demo.coinYCord, null);
+        Demo.coinRect.x = Demo.coinXCord;
+        Demo.coinRect.y = Demo.coinYCord;
       }
-      if(berriesVisible){
-        g.drawImage(berries,Demo.berriesXCord,Demo.berriesYCord,null);
-        Demo.berriesRect.x=Demo.berriesXCord;
-        Demo.berriesRect.y=Demo.berriesYCord;
+      if (berriesVisible) {
+        imageGraphics.drawImage(berries, Demo.berriesXCord, Demo.berriesYCord, null);
+        Demo.berriesRect.x = Demo.berriesXCord;
+        Demo.berriesRect.y = Demo.berriesYCord;
       }
 
-      if(playerRect.intersects(coinRect)&&coinDisplay){
+      if (playerRect.intersects(coinRect) && coinDisplay) {
         Demo.coinAudio.play();
-        coinDisplay=false;
-        score+=scoreArray[whichCoin];
+        coinDisplay = false;
+        score += scoreArray[whichCoin];
       }
 
 
-      if(playerRect.intersects(berriesRect)&&berriesVisible){
+      if (playerRect.intersects(berriesRect) && berriesVisible) {
         Demo.berryAudio.play();
-        berriesVisible=false;
-        clonesActive=true;
-        cloneXCord[0]=cloneXCord[1]=cloneXCord[2]=Demo.berriesXCord;
-        cloneYCord[0]=cloneYCord[1]=cloneYCord[2]=Demo.berriesYCord;
+        berriesVisible = false;
+        clonesActive = true;
+        cloneXCord[0] = cloneXCord[1] = cloneXCord[2] = Demo.berriesXCord;
+        cloneYCord[0] = cloneYCord[1] = cloneYCord[2] = Demo.berriesYCord;
       }
 
-      Demo.coinXCord-=20;
-      if(Demo.coinXCord<=-30)
-      {
-        coinDisplay=false;
+      Demo.coinXCord -= 15;
+      if (Demo.coinXCord <= -30) {
+        coinDisplay = false;
       }
-      Demo.berriesXCord-=20;
-      if(Demo.berriesXCord<=-30)
-      {
-        berriesVisible=false;
+      Demo.berriesXCord -= 15;
+      if (Demo.berriesXCord <= -30) {
+        berriesVisible = false;
       }
 
 
-      if(Demo.clonesActive){
-        g.drawImage(imageArray[count],cloneXCord[0],cloneYCord[0],null);
-        g.drawImage(imageArray[count],cloneXCord[1],cloneYCord[1],null);
-        g.drawImage(imageArray[count],cloneXCord[2],cloneYCord[2],null);
-        Demo.clone1Rect.x=cloneXCord[0];
-        Demo.clone2Rect.x=cloneXCord[1];
-        Demo.clone3Rect.x=cloneXCord[2];
-        Demo.clone1Rect.y=cloneYCord[0];
-        Demo.clone2Rect.y=cloneYCord[1];
-        Demo.clone3Rect.y=cloneYCord[2];
+      if (Demo.clonesActive) {
+        imageGraphics.drawImage(imageArray.get(count), cloneXCord[0], cloneYCord[0], null);
+        imageGraphics.drawImage(imageArray.get(count), cloneXCord[1], cloneYCord[1], null);
+        imageGraphics.drawImage(imageArray.get(count), cloneXCord[2], cloneYCord[2], null);
+        Demo.clone1Rect.x = cloneXCord[0];
+        Demo.clone2Rect.x = cloneXCord[1];
+        Demo.clone3Rect.x = cloneXCord[2];
+        Demo.clone1Rect.y = cloneYCord[0];
+        Demo.clone2Rect.y = cloneYCord[1];
+        Demo.clone3Rect.y = cloneYCord[2];
       }
-      if(clonesActive) {
+      if (clonesActive) {
         cloneXCord[0] += 30;
         cloneXCord[1] += 30;
         cloneXCord[2] += 30;
         cloneYCord[1] += 10;
         cloneYCord[2] -= 10;
       }
-      if(cloneXCord[0]>=1000) {
+      if (cloneXCord[0] >= 1000) {
         clonesActive = false;
       }
 
-      if(Demo.isPlayerVisible)
-        g.drawImage(imageArray[count], 63, Demo.yCord, null);
+      if (Demo.isPlayerVisible)
+        imageGraphics.drawImage(imageArray.get(count), 63, Demo.yCord, null);
       else
-        g.drawImage(tImageArray[count], 63, Demo.yCord, null);
+        imageGraphics.drawImage(tImageArray[count], 63, Demo.yCord, null);
 
       if (!Demo.started) {
-        g.drawImage(controls, 400, 227, null);
+        imageGraphics.drawImage(controls, 400, 227, null);
         continue;
       }
 
-
-      if(ran.nextInt(40)==8&&!Demo.intruderVisible){
-        Demo.intruderVisible=true;
-        intruderNumber=ran.nextInt(3);
+      if (ran.nextInt(100) == 9 && !Demo.intruderVisible) {
+        Demo.intruderVisible = true;
+        intruderNumber = ran.nextInt(3);
         Demo.jumpAudio.play();
-        Demo.intruderShown=intrudersImage[intruderNumber];
-        Demo.intruderYVel=-25;
-       Demo.intruderYAcc=1;
-       Demo.intruderXCord=500;
-       Demo.intruderYCord=500;
+        Demo.intruderShown = intrudersImage[intruderNumber];
+        Demo.intruderYVel = -25;
+        Demo.intruderYAcc = 1;
+        Demo.intruderXCord = 500;
+        Demo.intruderYCord = 500;
       }
 
-      if(Demo.intruderVisible){
-        g.drawImage(intruderShown,Demo.intruderXCord,Demo.intruderYCord,null);
-        Demo.intruderYCord+=Demo.intruderYVel;
-        Demo.intruderYVel+=Demo.intruderYAcc;
-        Demo.intruderRect.x=Demo.intruderXCord;
-        Demo.intruderRect.y=Demo.intruderYCord;
-        Demo.intruderXCord+=-20;
+      if (Demo.intruderVisible) {
+        imageGraphics.drawImage(intruderShown, Demo.intruderXCord, Demo.intruderYCord, null);
+        Demo.intruderYCord += Demo.intruderYVel;
+        Demo.intruderYVel += Demo.intruderYAcc;
+        Demo.intruderRect.x = Demo.intruderXCord;
+        Demo.intruderRect.y = Demo.intruderYCord;
+        Demo.intruderXCord += -20;
       }
 
-      if(Demo.intruderXCord<=-52&&Demo.intruderVisible){
-        Demo.intruderVisible=false;
+      if (Demo.intruderXCord <= -52 && Demo.intruderVisible) {
+        Demo.intruderVisible = false;
       }
 
-      if(intruderRect.intersects(playerRect)&&intruderVisible&&Demo.isPlayerVisible){
+      if (intruderRect.intersects(playerRect) && intruderVisible && Demo.isPlayerVisible) {
         Demo.hitAudio.play();
-        Demo.lost=true;
+        Demo.lost = true;
       }
 
       if (Demo.hurdle1XCord <= -33 && Demo.hurdle2XCord <= 33) {
-        hurdle1Visible=true;
-        hurdle2Visible=true;
+        hurdle1Visible = true;
+        hurdle2Visible = true;
         forkOrBranch = ran.nextBoolean();
         if (!forkOrBranch) {
           Demo.hurdle[0] = branch;
@@ -428,8 +465,8 @@ public class Demo implements KeyListener {
         }
       }
       if (Demo.hurdle3XCord <= -33 && Demo.hurdle4XCord <= 33) {
-        hurdle3Visible=true;
-        hurdle4Visible=true;
+        hurdle3Visible = true;
+        hurdle4Visible = true;
         forkOrBranch = ran.nextBoolean();
         if (forkOrBranch) {
           Demo.hurdle[2] = branch;
@@ -468,40 +505,38 @@ public class Demo implements KeyListener {
       }
 
 
-
-      if ((playerRect.intersects(hurdle1Rect) || playerRect.intersects(hurdle2Rect) || playerRect.intersects(hurdle3Rect) || playerRect.intersects(hurdle4Rect))&&Demo.isPlayerVisible)
-      {
+      if ((playerRect.intersects(hurdle1Rect) || playerRect.intersects(hurdle2Rect) || playerRect.intersects(hurdle3Rect) || playerRect.intersects(hurdle4Rect)) && Demo.isPlayerVisible) {
         Demo.hitAudio.play();
         Demo.lost = true;
       }
 
-      if(clonesActive) {
+      if (clonesActive) {
         if ((clone1Rect.intersects(hurdle1Rect) || clone2Rect.intersects(hurdle1Rect) || clone3Rect.intersects(hurdle1Rect)))
-          hurdle1Visible = hurdle2Visible=false;
+          hurdle1Visible = hurdle2Visible = false;
         if ((clone1Rect.intersects(hurdle2Rect) || clone2Rect.intersects(hurdle2Rect) || clone3Rect.intersects(hurdle2Rect)))
-          hurdle1Visible=hurdle2Visible = false;
+          hurdle1Visible = hurdle2Visible = false;
         if ((clone1Rect.intersects(hurdle3Rect) || clone2Rect.intersects(hurdle3Rect) || clone3Rect.intersects(hurdle3Rect)))
-          hurdle4Visible=hurdle3Visible = false;
+          hurdle4Visible = hurdle3Visible = false;
         if ((clone1Rect.intersects(hurdle4Rect) || clone2Rect.intersects(hurdle4Rect) || clone3Rect.intersects(hurdle4Rect)))
-          hurdle3Visible=hurdle4Visible = false;
+          hurdle3Visible = hurdle4Visible = false;
         if ((clone1Rect.intersects(intruderRect) || clone2Rect.intersects(intruderRect) || clone3Rect.intersects(intruderRect)))
-          intruderVisible= false;
+          intruderVisible = false;
       }
-      g.setColor(Color.BLACK);
-      g.setFont(font2);
-      g.drawString("Your Score : " + Demo.score, 30, 40);
+      imageGraphics.setColor(Color.BLACK);
+      imageGraphics.setFont(font2);
+      imageGraphics.drawString("Your Score : " + Demo.score, 30, 40);
       Demo.score++;
 
-      starXCord-=20;
-      if(starXCord<-40)
-        starVisible=false;
+      starXCord -= 15;
+      if (starXCord < -40)
+        starVisible = false;
       Demo.yCord += Demo.yVel;
       Demo.yVel += Demo.yAcc;
 
-      Demo.hurdle1XCord -= 20;
-      Demo.hurdle2XCord -= 20;
-      Demo.hurdle3XCord -= 20;
-      Demo.hurdle4XCord -= 20;
+      Demo.hurdle1XCord -= 15;
+      Demo.hurdle2XCord -= 15;
+      Demo.hurdle3XCord -= 15;
+      Demo.hurdle4XCord -= 15;
 
       if (yCord > 560 || yCord < -60) {
         Demo.lost = true;
@@ -514,15 +549,38 @@ public class Demo implements KeyListener {
         xVal = 1100;
 
 
-      backxcord -= 20;
-      if (backxcord <= -1000)
-        backxcord = 1000;
-      if (back1xcord <= -1000)
-        back1xcord = 1000;
-      back1xcord -= 20;
+      gx1-=40;
+      gx2-=40;
+      if(gx1<=-1000)
+        gx1=1000;
+      if(gx2<=-1000)
+        gx2=1000;
+
+      fx1-=20;
+      fx2-=20;
+      if(fx1<=-1000)
+        fx1=1000;
+      if(fx2<=-1000)
+        fx2=1000;
+
+      bx1-=10;
+      bx2-=10;
+      if(bx1<=-1000)
+        bx1=1000;
+      if(bx2<=-1000)
+        bx2=1000;
+
+      cx1-=5;
+      cx2-=5;
+      if(cx1<=-1000)
+        cx1=1000;
+      if(cx2<=-1000)
+        cx2=1000;
+
 
     }
   }
+
 
   @Override
   public void keyTyped(KeyEvent e) {

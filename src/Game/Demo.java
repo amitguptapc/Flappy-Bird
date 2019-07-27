@@ -27,12 +27,12 @@ public class Demo implements KeyListener {
   private static boolean hurdle1Visible,hurdle2Visible,hurdle3Visible,hurdle4Visible;
   private static int starXCord=1000;
   private static int starYCord,coinYCord,coinXCord,berriesYCord,berriesXCord;
-  private static int cloneXCord[]=new int[3];
-  private static int cloneYCord[]=new int[3];
+  private static int[] cloneXCord = new int[3];
+  private static int[] cloneYCord = new int[3];
   private static int score = 0;
   private static int counter=60;
   private static boolean isPlayerVisible=true,coinDisplay,starVisible,berriesVisible,clonesActive,intruderVisible;
-  private static Image hurdle[] = new Image[4];
+  private static Image[] hurdle = new Image[4];
   private static Rectangle intruderRect;
   private static Rectangle hurdle1Rect, hurdle2Rect, hurdle3Rect, hurdle4Rect,starRect,coinRect,berriesRect,clone1Rect,clone2Rect,clone3Rect;
   private static Image branch;
@@ -185,10 +185,10 @@ public class Demo implements KeyListener {
     imageArray.add(p6);
     imageArray.add(p7);
     imageArray.add(p8);
-    Image tImageArray[] = {pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8};
-    Image coinArray[] = {coin1, coin2, coin3, coin4};
-    Image intrudersImage[] = {happyPakia, angryPakia, sadPakia};
-    int scoreArray[] = {100, 200, 500, 1000};
+    Image[] tImageArray = {pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8};
+    Image[] coinArray = {coin1, coin2, coin3, coin4};
+    Image[] intrudersImage = {happyPakia, angryPakia, sadPakia};
+    int[] scoreArray = {100, 200, 500, 1000};
 
     Demo.hurdle1XCord = 1000;
     Demo.hurdle2XCord = 1000;
@@ -224,7 +224,7 @@ public class Demo implements KeyListener {
 
     while (true) {
       try {
-        Thread.sleep(70);
+        Thread.sleep(50);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
@@ -256,7 +256,6 @@ public class Demo implements KeyListener {
       imageGraphics.drawImage(fTree2,fx2,0,null);
       imageGraphics.drawImage(grass1,gx1,0,null);
       imageGraphics.drawImage(grass2,gx2,0,null);
-
       imageGraphics.drawImage(log, Demo.logYCord, 330, null);
 
 
@@ -280,6 +279,9 @@ public class Demo implements KeyListener {
         hurdle4Rect.y = Demo.hurdle4YCord;
         imageGraphics.drawImage(Demo.hurdle[3], Demo.hurdle4XCord, Demo.hurdle4YCord, null);
       }
+
+
+
 
       if (ran.nextInt(10) == 5 && Demo.hurdle1XCord >= 700 && Demo.hurdle1XCord <= 800 && !starVisible && Demo.isPlayerVisible) {
         starVisible = true;
@@ -576,8 +578,6 @@ public class Demo implements KeyListener {
         cx1=1000;
       if(cx2<=-1000)
         cx2=1000;
-
-
     }
   }
 

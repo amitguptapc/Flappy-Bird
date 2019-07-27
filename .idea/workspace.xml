@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Pappu Pakia:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="80597a1c-d8dd-4264-8564-9470e900c5e0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/apple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/mute.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/plank_bot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/plank_mid.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/plank_top.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/stand.png" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Game/Demo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-399">
+              <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>playerRect</find>
+      <find>handle</find>
+      <find>hurdle</find>
+      <find>g.drawI</find>
+      <find>starRe</find>
+      <find>log</find>
+      <find>logYCord</find>
+      <find>hurdle1Visible</find>
+      <find>hurdle1visible</find>
+      <find>clone1Rect</find>
+      <find>Image</find>
+      <find>g.drawImage</find>
+      <find>KeyListener</find>
+      <find>intruderXCord</find>
+      <find>back1</find>
+      <find>back1xcord</find>
+      <find>coinRect</find>
+      <find>yCord</find>
+      <find>20</find>
+      <find>10</find>
+      <find>g.</find>
+      <find>started</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>10</replace>
+      <replace>15</replace>
+      <replace>imageGraphics.</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/Game/Sample1.java" />
+        <option value="$PROJECT_DIR$/src/Game/Sample.java" />
+        <option value="$PROJECT_DIR$/src/Game/Demo.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="715" />
+    <option name="y" value="90" />
+    <option name="width" value="980" />
+    <option name="height" value="990" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Pappu Pakia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pappu Pakia" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pappu Pakia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pappu Pakia" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pappu Pakia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pappu Pakia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pappu Pakia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pappu Pakia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pappu Pakia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pappu Pakia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Course" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535471108930" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RoadFighter" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Demo">
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Game.Demo" />
+      <module name="Pappu Pakia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Game.Demo" />
+      <module name="Pappu Pakia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="Sample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Game.Sample" />
+      <module name="Pappu Pakia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Demo" />
+      <item itemvalue="Application.Sample" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Demo" />
+        <item itemvalue="Application.Sample" />
+        <item itemvalue="Application.Demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80597a1c-d8dd-4264-8564-9470e900c5e0" name="Default" comment="" />
+      <created>1524249303550</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1524249303550</updated>
+      <workItem from="1524249307989" duration="106000" />
+      <workItem from="1524500642235" duration="58000" />
+      <workItem from="1524644351340" duration="1819000" />
+      <workItem from="1524843689812" duration="918000" />
+      <workItem from="1524895903951" duration="8983000" />
+      <workItem from="1524912211183" duration="153000" />
+      <workItem from="1524927539436" duration="181000" />
+      <workItem from="1524932757128" duration="4298000" />
+      <workItem from="1524978526418" duration="169000" />
+      <workItem from="1524983440548" duration="948000" />
+      <workItem from="1525003103057" duration="28000" />
+      <workItem from="1525072170814" duration="8088000" />
+      <workItem from="1525088785354" duration="18000" />
+      <workItem from="1525095072788" duration="305000" />
+      <workItem from="1525107288401" duration="10421000" />
+      <workItem from="1525119013538" duration="737000" />
+      <workItem from="1525153773849" duration="8723000" />
+      <workItem from="1525166884624" duration="2396000" />
+      <workItem from="1525227071626" duration="520000" />
+      <workItem from="1525243588479" duration="135000" />
+      <workItem from="1525243880388" duration="304000" />
+      <workItem from="1525244214353" duration="15000" />
+      <workItem from="1525247668169" duration="138000" />
+      <workItem from="1525248118795" duration="32000" />
+      <workItem from="1525248215189" duration="4466000" />
+      <workItem from="1525252937958" duration="4355000" />
+      <workItem from="1525258423461" duration="154000" />
+      <workItem from="1525261149977" duration="931000" />
+      <workItem from="1525270449204" duration="392000" />
+      <workItem from="1525277110166" duration="896000" />
+      <workItem from="1525280791840" duration="29000" />
+      <workItem from="1525293645089" duration="330000" />
+      <workItem from="1525328144139" duration="21000" />
+      <workItem from="1525501281468" duration="1052000" />
+      <workItem from="1525630477523" duration="652000" />
+      <workItem from="1525633770218" duration="141000" />
+      <workItem from="1525674460941" duration="230000" />
+      <workItem from="1525675165180" duration="43000" />
+      <workItem from="1525676695881" duration="847000" />
+      <workItem from="1525693494590" duration="21000" />
+      <workItem from="1525697653888" duration="589000" />
+      <workItem from="1525717743288" duration="561000" />
+      <workItem from="1525719575097" duration="2005000" />
+      <workItem from="1525767433023" duration="1009000" />
+      <workItem from="1525769599299" duration="34000" />
+      <workItem from="1525793433870" duration="601000" />
+      <workItem from="1525894712158" duration="233000" />
+      <workItem from="1525932618605" duration="57000" />
+      <workItem from="1526031426883" duration="414000" />
+      <workItem from="1526840366210" duration="233000" />
+      <workItem from="1527624563819" duration="1398000" />
+      <workItem from="1528454564409" duration="113000" />
+      <workItem from="1529526559233" duration="274000" />
+      <workItem from="1532456119042" duration="805000" />
+      <workItem from="1532537229853" duration="601000" />
+      <workItem from="1535470895648" duration="296000" />
+      <workItem from="1564153724534" duration="830000" />
+      <workItem from="1564199793509" duration="462000" />
+    </task>
+    <task id="LOCAL-00001" summary="Modified the hurdles">
+      <created>1525110158950</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1525110158950</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added power ups and coins">
+      <created>1525118460948</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1525118460948</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Clones and Intruders">
+      <created>1525256034783</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1525256034783</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Flickering Problem Fixed">
+      <created>1525721535160</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1525721535160</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="74568000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4985755" visible="true" weight="0.21184632" />
+      <window_info id="Structure" order="1" sideWeight="0.5014245" side_tool="true" weight="0.1818792" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49934897" weight="0.25785482" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32905984" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50065106" side_tool="true" weight="0.28275862" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32827735" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32905984" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.32965517" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" x="0" y="0" width="675" height="638" id="Documentation" order="9" weight="0.3294271" />
+      <window_info anchor="right" id="Maven" order="10" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modified the hurdles" />
+    <MESSAGE value="Added power ups and coins" />
+    <MESSAGE value="Added Clones and Intruders" />
+    <MESSAGE value="Flickering Problem Fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flickering Problem Fixed" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Game/Sample.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.desktop/java/awt/Rectangle.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.desktop/java/awt/event/KeyListener.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java" />
+    <entry file="file://$PROJECT_DIR$/src/Game/Demo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399">
+          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>Pappu Pakia:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>9.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Pappu Pakia</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
